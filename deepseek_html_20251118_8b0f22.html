@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DuckEdu - Edukasi Peternakan Bebek Petelur</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #27AE60;
+            --secondary: #2ECC71;
+            --accent: #F1C40F;
+            --light: #E8F5E8;
+            --dark: #1E8449;
+            --text: #2C3E50;
+        }
+
+        body {
+            background-color: #f8fff8;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(39, 174, 96, 0.8), rgba(30, 132, 73, 0.8)), 
+                        url('https://images.unsplash.com/photo-1596733430284-f7437764b1a9?ixlib=rb-4.0.3') center/cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--text);
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: transform 0.3s, background 0.3s;
+            font-size: 1.1rem;
+            margin: 0 10px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            background: #FFD700;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Edukasi Section */
+        .edukasi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .edukasi-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 5px solid var(--primary);
+        }
+
+        .edukasi-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .edukasi-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .edukasi-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Contact */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .payment-method {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            min-width: 150px;
+        }
+
+        .payment-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark), #1a6b38);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                height: 70vh;
+            }
+
+            .cta-button {
+                display: block;
+                margin: 10px auto;
+                max-width: 250px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-duck"></i>
+                DuckEdu.com
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#edukasi">Edukasi</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#kontak">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Edukasi Peternakan Bebek Petelur</h1>
+            <p>Pelajari cara ternak bebek petelur yang efektif dan menguntungkan. Dari pemula hingga profesional.</p>
+            <div>
+                <a href="#edukasi" class="cta-button">Mulai Belajar</a>
+                <a href="#kontak" class="cta-button" style="background: white; color: var(--primary);">Konsultasi Gratis</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Edukasi Section -->
+    <section id="edukasi">
+        <div class="section-title">
+            <h2>Panduan Lengkap Ternak Bebek Petelur</h2>
+            <p>Step-by-step cara beternak bebek petelur untuk pemula</p>
+        </div>
+        
+        <div class="edukasi-grid">
+            <div class="edukasi-card">
+                <div class="edukasi-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h3>Persiapan Kandang</h3>
+                <p><strong>Lokasi:</strong> Pilih tempat yang tenang, jauh dari keramaian, dengan sirkulasi udara baik.</p>
+                <p><strong>Ukuran:</strong> 1 m² untuk 4-5 ekor bebek dewasa</p>
+                <p><strong>Material:</strong> Bambu/kayu dengan atap genteng/seng</p>
+                <p><strong>Fasilitas:</strong> Tempat pakan, minum, dan area bertelur yang nyaman</p>
+            </div>
+
+            <div class="edukasi-card">
+                <div class="edukasi-icon">
+                    <i class="fas fa-egg"></i>
+                </div>
+                <h3>Pemilihan Bibit</h3>
+                <p><strong>Jenis Unggul:</strong> Bebek Alabio, Mojosari, atau Peking</p>
+                <p><strong>Ciri Bibit Baik:</strong></p>
+                <ul>
+                    <li>Bulu bersih dan mengkilap</li>
+                    <li>Aktif bergerak</li>
+                    <li>Mata jernih dan cerah</li>
+                    <li>Nafsu makan baik</li>
+                </ul>
+                <p><strong>Usia Ideal:</strong> 2-3 bulan (DOD)</p>
+            </div>
+
+            <div class="edukasi-card">
+                <div class="edukasi-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>Pemberian Pakan</h3>
+                <p><strong>Jadwal:</strong> 2-3 kali sehari (pagi, siang, sore)</p>
+                <p><strong>Komposisi Pakan:</strong></p>
+                <ul>
+                    <li>Dedak 40%</li>
+                    <li>Jagung 35%</li>
+                    <li>Bungkil kedelai 15%</li>
+                    <li>Mineral dan vitamin 10%</li>
+                </ul>
+                <p><strong>Takaran:</strong> 120-150 gram/ekor/hari</p>
+            </div>
+
+            <div class="edukasi-card">
+                <div class="edukasi-icon">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <h3>Perawatan Kesehatan</h3>
+                <p><strong>Vaksinasi:</strong> Umur 1 minggu dan 1 bulan</p>
+                <p><strong>Kebersihan:</strong> Bersihkan kandang setiap hari</p>
+                <p><strong>Pencegahan Penyakit:</strong></p>
+                <ul>
+                    <li>Berikan vitamin rutin</li>
+                    <li>Jaga kebersihan air minum</li>
+                    <li>Isolasi bebek sakit</li>
+                </ul>
+            </div>
+
+            <div class="edukasi-card">
+                <div class="edukasi-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Panen dan Pasca Panen</h3>
+                <p><strong>Mulai Bertelur:</strong> Umur 5-6 bulan</p>
+                <p><strong>Produktivitas:</strong> 80-90% per hari</p>
+                <p><strong>Cara Panen:</strong></p>
+                <ul>
+                    <li>Panen pagi hari</li>
+                    <li>Pisahkan telur bersih dan kotor</li>
+                    <li>Simpan di tempat sejuk</li>
+                </ul>
+            </div>
+
+            <div class="edukasi-card">
+                <div class="edukasi-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3>Analisis Usaha</h3>
+                <p><strong>Modal Awal:</strong> Rp 10-15 juta (100 ekor)</p>
+                <p><strong>Pendapatan:</strong> Rp 2-3 juta/bulan</p>
+                <p><strong>BEP:</strong> 8-12 bulan</p>
+                <p><strong>Keuntungan:</strong> 30-40% dari total biaya</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <div class="section-title">
+            <h2>Gallery Peternakan</h2>
+            <p>Lihat aktivitas dan kondisi peternakan bebek kami</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1596733430284-f7437764b1a9?ixlib=rb-4.0.3" alt="Bebek Petelur">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1553263185-b847996f2b1a?ixlib=rb-4.0.3" alt="Kandang Bebek">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1581693530354-5c00e01bcede?ixlib=rb-4.0.3" alt="Telur Bebek">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3" alt="Pakan Bebek">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="kontak">
+        <div class="section-title">
+            <h2>Konsultasi & Pemesanan</h2>
+            <p>Hubungi kami untuk konsultasi gratis atau pemesanan bibit/telur</p>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Informasi Kontak</h3>
+                <p style="margin-bottom: 2rem;"><i class="fas fa-map-marker-alt"></i> Peternakan Bebek Modern - Jawa Barat</p>
+                
+                <div style="margin-bottom: 2rem;">
+                    <h4><i class="fas fa-phone"></i> Telepon/WhatsApp</h4>
+                    <p style="font-size: 1.2rem; font-weight: bold;">0857-7777-0716</p>
+                </div>
+                
+                <div style="margin-bottom: 2rem;">
+                    <h4><i class="fas fa-envelope"></i> Email</h4>
+                    <p style="font-size: 1.1rem;">abybusro@gmail.com</p>
+                </div>
+                
+                <div style="margin-bottom: 2rem;">
+                    <h4><i class="fab fa-instagram"></i> Instagram</h4>
+                    <p style="font-size: 1.1rem;">@busbae</p>
+                </div>
+
+                <div>
+                    <h4>Jam Operasional</h4>
+                    <p>Senin - Minggu: 08.00 - 17.00 WIB</p>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h3>Form Konsultasi & Pemesanan</h3>
+                <form id="consultForm">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Nomor WhatsApp</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Layanan yang Dibutuhkan</label>
+                        <select id="service" name="service" required>
+                            <option value="">Pilih Layanan</option>
+                            <option value="konsultasi">Konsultasi Gratis</option>
+                            <option value="bibit">Pemesanan Bibit</option>
+                            <option value="telur">Pemesanan Telur</option>
+                            <option value="pelatihan">Pelatihan Ternak</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Pertanyaan atau Pesan</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fab fa-whatsapp"></i> Kirim via WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Payment Methods -->
+        <div style="text-align: center; margin-top: 3rem;">
+            <h3>Metode Pembayaran</h3>
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <div class="payment-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <p>Transfer via WhatsApp</p>
+                    <strong>0857-7777-0716</strong>
+                </div>
+                <div class="payment-method">
+                    <div class="payment-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <p>DANA</p>
+                    <strong>0857-7777-0716</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="logo" style="justify-content: center; margin-bottom: 1rem;">
+            <i class="fas fa-duck"></i>
+            DuckEdu.com
+        </div>
+        <p>Platform Edukasi Peternakan Bebek Petelur Terlengkap</p>
+        
+        <div class="social-links">
+            <a href="https://instagram.com/busbae" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/6285777770716" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="mailto:abybusro@gmail.com">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        
+        <p>&copy; 2024 DuckEdu.com - All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Website Edukasi Peternakan Bebek Petelur Modern</p>
+    </footer>
+
+    <script>
+        // Smooth scroll untuk navigasi
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Form submission ke WhatsApp
+        document.getElementById('consultForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+            
+            const whatsappMessage = `Halo DuckEdu!%0A%0A*Data Konsultasi:*%0ANama: ${name}%0ANomor: ${phone}%0ALayanan: ${service}%0APesan: ${message}%0A%0ASaya ingin berkonsultasi tentang peternakan bebek petelur.`;
+            
+            window.open(`https://wa.me/6285777770716?text=${whatsappMessage}`, '_blank');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Sticky header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'var(--primary)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.15)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, var(--primary), var(--dark))';
+                header.style.boxShadow = '0 2px 15px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Animasi cards saat scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Terapkan animasi ke semua cards
+        document.querySelectorAll('.edukasi-card, .gallery-item, .payment-method').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
